@@ -4,7 +4,7 @@ provider "azurerm" {
 
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
-  name     = "absarrg"
+  name     = "absarresg"
   location = "East US"
 
   tags = {
