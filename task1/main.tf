@@ -12,7 +12,7 @@ output "secret_value"  {
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
   name     = data.azurerm_key_vault_secret.example.value
-  location = var.resource_group_location
+  location = "East US"
 
   tags = {
     environment = "production"
