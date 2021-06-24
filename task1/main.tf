@@ -8,6 +8,7 @@ data "azurerm_key_vault_secret" "example" {
 
 output "secret_value"  {
   value = data.azurerm_key_vault_secret.example.value
+  sensitive = true
 }
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
