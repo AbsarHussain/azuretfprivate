@@ -11,7 +11,7 @@ output "secret_value"  {
 }
 # Create a resource group if it doesn't exist
 resource "azurerm_resource_group" "rg" {
-  name     = ["${output.secret_value.value}"]
+  name     = output.secret_value
   location = var.resource_group_location
 
   tags = {
