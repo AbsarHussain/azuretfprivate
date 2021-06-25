@@ -70,7 +70,7 @@ resource "azurerm_virtual_network" "vnet" {
 # Create subnet
 resource "azurerm_subnet" "subnet" {
   name                 = data.azurerm_key_vault_secret.subnetname.value
-  resource_group_name  = azurerm_resource_group.rg.name
+  resource_group_name  = data.azurerm_key_vault_secret.resourcegroupname.value
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
 }
@@ -78,8 +78,8 @@ resource "azurerm_subnet" "subnet" {
 # Create public IPs
 resource "azurerm_public_ip" "public_ip" {
   name                = data.azurerm_key_vault_secret.publicipname.value
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_key_vault_secret.resourcegrouplocation.value
+  resource_group_name = data.azurerm_key_vault_secret.resourcegroupname.value
   allocation_method   = "Dynamic"
 
   tags = {
@@ -90,8 +90,8 @@ resource "azurerm_public_ip" "public_ip" {
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "nsg" {
   name                = data.azurerm_key_vault_secret.networksecuritygroupname.value
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_key_vault_secret.resourcegrouplocation.value
+  resource_group_name = data.azurerm_key_vault_secret.resourcegroupname.value
 
   security_rule {
     name                       = "SSH"
@@ -113,8 +113,8 @@ resource "azurerm_network_security_group" "nsg" {
 # Create network interface
 resource "azurerm_network_interface" "nic" {
   name                = data.azurerm_key_vault_secret.networkinterfacename.value
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  location            = data.azurerm_key_vault_secret.resourcegrouplocation.value
+  resource_group_name = data.azurerm_key_vault_secret.resourcegroupname.value
 
   ip_configuration {
     name                          = "myNicConfiguration"
@@ -166,8 +166,8 @@ resource "tls_private_key" "example_ssh" {
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "linuxvm" {
   name                  = data.azurerm_key_vault_secret.linuxvirtualmachinename.value
-  location              = azurerm_resource_group.rg.location
-  resource_group_name   = azurerm_resource_group.rg.name
+  location              = data.azurerm_key_vault_secret.resourcegrouplocation.value
+  resource_group_name   = data.azurerm_key_vault_secret.resourcegroupname.value
   network_interface_ids = [azurerm_network_interface.nic.id]
   size                  = "Standard_DS1_v2"
 
