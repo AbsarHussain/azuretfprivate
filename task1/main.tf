@@ -3,7 +3,7 @@ provider "azurerm" {
 }
  data "azurerm_key_vault_secret" "example" {
    name         = "linuxvirtualmachinename"
-   key_vault_id = "/subscriptions/23fcce43-2d2f-4071-9e69-fdb25386438a/resourceGroups/firstresourcegroupfrompipeline/providers/Microsoft.KeyVault/vaults/vmsecretspipeline"
+   key_vault_id = "/subscriptions/23fcce43-2d2f-4071-9e69-fdb25386438a/resourceGroups/howden_rg/providers/Microsoft.KeyVault/vaults/howdenrgkeyvault"
  }
 
  output "secret_value"  {
