@@ -20,7 +20,7 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
-resource "azurerm_resource_group" "rg" {
+resource "azurerm_resource_group" "rgsecond" {
   name     = "firstresourcegroupfrompipeline"
   location = "East US"
 
