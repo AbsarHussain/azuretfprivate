@@ -19,3 +19,12 @@ resource "azurerm_resource_group" "rg" {
     environment = "production"
   }
 }
+
+resource "azurerm_resource_group" "rg" {
+  name     = "firstresourcegroupfrompipeline"
+  location = "East US"
+
+  tags = {
+    environment = "production"
+  }
+}
