@@ -61,7 +61,7 @@ resource "azurerm_virtual_network" "vnet" {
   address_space       = ["10.0.0.0/16"]
   location            = data.azurerm_key_vault_secret.resourcegrouplocation.value
   resource_group_name = data.azurerm_key_vault_secret.resourcegroupname.value
-
+depends_on = ["azurerm_resource_group.rg" ]
   tags = {
     environment = "salman"
   }
@@ -73,6 +73,7 @@ resource "azurerm_subnet" "subnet" {
   resource_group_name  = data.azurerm_key_vault_secret.resourcegroupname.value
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
+  depends_on = ["azurerm_resource_group.rg" ]
 }
 
 # Create public IPs
@@ -81,7 +82,7 @@ resource "azurerm_public_ip" "public_ip" {
   location            = data.azurerm_key_vault_secret.resourcegrouplocation.value
   resource_group_name = data.azurerm_key_vault_secret.resourcegroupname.value
   allocation_method   = "Dynamic"
-
+depends_on = ["azurerm_resource_group.rg" ]
   tags = {
     environment = "salman"
   }
@@ -104,7 +105,7 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
+depends_on = ["azurerm_resource_group.rg" ]
   tags = {
     environment = "salman"
   }
@@ -122,7 +123,7 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
-
+depends_on = ["azurerm_resource_group.rg" ]
   tags = {
     environment = "salman"
   }
@@ -170,7 +171,7 @@ resource "azurerm_linux_virtual_machine" "linuxvm" {
   resource_group_name   = data.azurerm_key_vault_secret.resourcegroupname.value
   network_interface_ids = [azurerm_network_interface.nic.id]
   size                  = "Standard_DS1_v2"
-
+depends_on = ["azurerm_resource_group.rg" ]
   os_disk {
     name                 = "myOsDisk"
     caching              = "ReadWrite"
